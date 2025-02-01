@@ -11,13 +11,33 @@ const petsList = [
 ]
 
 function SimpleForm() {
-  return <div>Ready to start GP!</div>
+  const { petName, petType } = petsList;
+  console.log(petName, petType);
+
+  return (
+    <div className='container'>
+      <h1>Simple Form App</h1>
+      {petsList.map(pet => {
+        return (
+          <>
+            <p>`{pet.petName} is a {pet.petType}`</p>
+          </>
+        )
+      })}
+      <form className='form-container'>
+        <input></input>
+        <input></input>
+        <button>submit</button>
+      </form>
+      
+    </div>
+  )
 }
 
 render(
   <>
     <SimpleForm />
-    {/* <App /> */}
+    <App />
   </>
   , document.querySelector('#root')
 )
