@@ -28,7 +28,7 @@ export default function FriendForm(props) {
         {/* ////////// TEXT INPUTS ////////// */}
         {/* ////////// TEXT INPUTS ////////// */}
         {/* ////////// TEXT INPUTS ////////// */}
-        <label type='text'>Username
+        <label>Username
           {/* 🔥 STEP 3 - Make an input of type `text` for username.
               Controlled inputs need `value` and `onChange` props.
               Inputs render what they're told - their current value comes from app state.
@@ -37,18 +37,19 @@ export default function FriendForm(props) {
             onChange={onChange} 
             name='username' 
             type='text' 
-            placeholder='type a username...' 
-            value={values.username}
+            placeholder='Type a username...' 
+            value={values.username} 
+            maxLength="30"
           />
         </label>
 
-        <label type='email'>Email
+        <label>Email
           {/* 🔥 STEP 4 - Make an input of type `email` or `text` for email. */}
           <input 
             onChange={onChange} 
             name='email' 
             type='email' 
-            placeholder='type an email...' 
+            placeholder='Type an email...' 
             value={values.email}
           />
         </label>
@@ -58,11 +59,11 @@ export default function FriendForm(props) {
         {/* ////////// DROPDOWN ////////// */}
         <label>Role
           {/* 🔥 STEP 5 - Make dropdown for role. */}
-          <select name='dropdown' onChange={onChange} type='dropdown'>
+          <select onChange={onChange} name='role' value={values.role}>
             <option value=''>-- Select a Role --</option>
-            <option value='Friend'>Friend</option>
-            <option value='Family'>Family</option>
-            <option value='Colleague'>Colleague</option>
+            <option value='Student'>Student</option>
+            <option value='Instructor'>Instructor</option>
+            <option value='Alumni'>Alumni</option>
           </select>
         </label>
 

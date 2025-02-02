@@ -16,12 +16,13 @@ export default function App() {
   const [friends, setFriends] = useState([]) // careful what you initialize your state to
 
   // 🔥 STEP 1 - WE NEED STATE TO HOLD ALL VALUES OF THE FORM!
-  const [formValues, setFormValues] = useState([]) // fix this using the state hook
+  const [formValues, setFormValues] = useState(initialFormValues); // fix this using the state hook
+  const [formError, setFormError] = useState('');
 
   const updateForm = (inputName, inputValue) => {
     // 🔥 STEP 8 - IMPLEMENT a "form state updater" which will be used inside the inputs' `onChange` handler
     //  It takes in the name of an input and its value, and updates `formValues`
-    setFormValues({ ...formValues, [inputName]: inputValue })
+    setFormValues({ ...formValues, [inputName]: inputValue });
   }
 
   const submitForm = () => {
@@ -36,16 +37,15 @@ export default function App() {
       role: formValues.role,
     }
     if (!friend.username || !friend.email || !friend.role) {
-      return
+      setFormError("Please fill username & email, and select role.");
     }
-    axios.post('fakeapi.com/friends', friend)
+
+    axios.post('fakeapi.com/', friend)
       .then(res => {
-        setFriends([ ...friends, res.data ])
-        setFormValues(initialFormValues)
+        setFriends([ res.data, ...friends ]);
+        setFormValues(initialFormValues);
       })
-      .catch(err => {
-        console.log(err)
-      })
+      .catch(err => console.log(err))
   }
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function App() {
   return (
     <div className='container'>
       <h1>Form App</h1>
-
+      {formError && <h2 className='error'>{formError}</h2>}
       <FriendForm
         // 🔥 STEP 2 - The form component needs its props.
         //  Check implementation of FriendForm
